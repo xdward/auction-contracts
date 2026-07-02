@@ -1,0 +1,17 @@
+syntax = "proto3";
+package auction.service.v0;
+
+import "message.proto";
+
+option go_package = "github.com/xdward/auction-contracts/pb/service";
+
+service AuctionService {
+  // Creates a new auction listing.
+  rpc Sell(SellRequest) returns (SellResponse);
+
+  // Submits a bid for an existing auction listing.
+  rpc Bid(BidRequest) returns (BidResponse);
+
+  // Cancels an existing auction listing.
+  rpc Cancel(CancelRequest) returns (CancelResponse);
+}

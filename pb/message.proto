@@ -1,0 +1,55 @@
+syntax = "proto3";
+package auction.service.v0;
+
+option go_package = "github.com/xdward/auction-contracts/pb/message";
+
+// Request for creating an auction liisting.
+message SellRequest {
+  // Unique ID of the item being auctioned.
+  uint64 item_id = 1;
+
+  // Unique ID of the user auctioning the item.
+  uint64 seller_id = 2;
+
+  // Auction duration in milliseconds.
+  uint64 duration = 3;
+}
+
+// Response indicating whether the listing request succeeded.
+message SellResponse {
+  // True if the listing was successful.
+  bool success = 1;
+}
+
+// Request for submitting a bid on an auction listing.
+message BidRequest {
+  // Unique ID of the item being bid on.
+  uint64 item_id = 1;
+
+  // Unique ID of the user submitting the bid.
+  uint64 bidder_id = 2;
+
+  // Price offered by the bidder.
+  uint64 amount = 3;
+}
+
+// Response indicating whether the bid request succeeded.
+message BidResponse {
+  // True if the bid was successful.
+  bool success = 1;
+}
+
+// Request for cancelling an auction listing.
+message CancelRequest {
+  // Unique ID of the item to cancel.
+  uint64 item_id = 1;
+
+  // Unique ID of the user requesting the cancellation.
+  uint64 seller_id = 2;
+}
+
+// Response indicating whether the cancellation request succeeded.
+message CancelResponse {
+  // True if the cancellation was successful.
+  bool success = 1;
+}
