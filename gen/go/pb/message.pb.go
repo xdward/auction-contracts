@@ -4,7 +4,7 @@
 // 	protoc        v7.35.1
 // source: message.proto
 
-package message
+package pb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -364,7 +364,7 @@ const file_message_proto_rawDesc = "" +
 	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x1b\n" +
 	"\tseller_id\x18\x02 \x01(\x04R\bsellerId\"*\n" +
 	"\x0eCancelResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccessB0Z.github.com/xdward/auction-contracts/pb/messageb\x06proto3"
+	"\asuccess\x18\x01 \x01(\bR\asuccessB/Z-github.com/xdward/auction-contracts/gen/go/pbb\x06proto3"
 
 var (
 	file_message_proto_rawDescOnce sync.Once

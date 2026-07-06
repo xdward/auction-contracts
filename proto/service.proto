@@ -3,7 +3,7 @@ package auction.service.v0;
 
 import "message.proto";
 
-option go_package = "github.com/xdward/auction-contracts/pb/service";
+option go_package = "github.com/xdward/auction-contracts/gen/go/grpc";
 
 service AuctionService {
   // Creates a new auction listing.
