@@ -4,11 +4,10 @@
 // - protoc             v7.35.1
 // source: service.proto
 
-package grpc
+package pb
 
 import (
 	context "context"
-	pb "github.com/xdward/auction-contracts/gen/go/pb"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -30,11 +29,11 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuctionServiceClient interface {
 	// Creates a new auction listing.
-	Sell(ctx context.Context, in *pb.SellRequest, opts ...grpc.CallOption) (*pb.SellResponse, error)
+	Sell(ctx context.Context, in *SellRequest, opts ...grpc.CallOption) (*SellResponse, error)
 	// Submits a bid for an existing auction listing.
-	Bid(ctx context.Context, in *pb.BidRequest, opts ...grpc.CallOption) (*pb.BidResponse, error)
+	Bid(ctx context.Context, in *BidRequest, opts ...grpc.CallOption) (*BidResponse, error)
 	// Cancels an existing auction listing.
-	Cancel(ctx context.Context, in *pb.CancelRequest, opts ...grpc.CallOption) (*pb.CancelResponse, error)
+	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
 }
 
 type auctionServiceClient struct {
@@ -45,9 +44,9 @@ func NewAuctionServiceClient(cc grpc.ClientConnInterface) AuctionServiceClient {
 	return &auctionServiceClient{cc}
 }
 
-func (c *auctionServiceClient) Sell(ctx context.Context, in *pb.SellRequest, opts ...grpc.CallOption) (*pb.SellResponse, error) {
+func (c *auctionServiceClient) Sell(ctx context.Context, in *SellRequest, opts ...grpc.CallOption) (*SellResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(pb.SellResponse)
+	out := new(SellResponse)
 	err := c.cc.Invoke(ctx, AuctionService_Sell_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -55,9 +54,9 @@ func (c *auctionServiceClient) Sell(ctx context.Context, in *pb.SellRequest, opt
 	return out, nil
 }
 
-func (c *auctionServiceClient) Bid(ctx context.Context, in *pb.BidRequest, opts ...grpc.CallOption) (*pb.BidResponse, error) {
+func (c *auctionServiceClient) Bid(ctx context.Context, in *BidRequest, opts ...grpc.CallOption) (*BidResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(pb.BidResponse)
+	out := new(BidResponse)
 	err := c.cc.Invoke(ctx, AuctionService_Bid_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -65,9 +64,9 @@ func (c *auctionServiceClient) Bid(ctx context.Context, in *pb.BidRequest, opts 
 	return out, nil
 }
 
-func (c *auctionServiceClient) Cancel(ctx context.Context, in *pb.CancelRequest, opts ...grpc.CallOption) (*pb.CancelResponse, error) {
+func (c *auctionServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(pb.CancelResponse)
+	out := new(CancelResponse)
 	err := c.cc.Invoke(ctx, AuctionService_Cancel_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -80,11 +79,11 @@ func (c *auctionServiceClient) Cancel(ctx context.Context, in *pb.CancelRequest,
 // for forward compatibility.
 type AuctionServiceServer interface {
 	// Creates a new auction listing.
-	Sell(context.Context, *pb.SellRequest) (*pb.SellResponse, error)
+	Sell(context.Context, *SellRequest) (*SellResponse, error)
 	// Submits a bid for an existing auction listing.
-	Bid(context.Context, *pb.BidRequest) (*pb.BidResponse, error)
+	Bid(context.Context, *BidRequest) (*BidResponse, error)
 	// Cancels an existing auction listing.
-	Cancel(context.Context, *pb.CancelRequest) (*pb.CancelResponse, error)
+	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
 	mustEmbedUnimplementedAuctionServiceServer()
 }
 
@@ -95,13 +94,13 @@ type AuctionServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAuctionServiceServer struct{}
 
-func (UnimplementedAuctionServiceServer) Sell(context.Context, *pb.SellRequest) (*pb.SellResponse, error) {
+func (UnimplementedAuctionServiceServer) Sell(context.Context, *SellRequest) (*SellResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Sell not implemented")
 }
-func (UnimplementedAuctionServiceServer) Bid(context.Context, *pb.BidRequest) (*pb.BidResponse, error) {
+func (UnimplementedAuctionServiceServer) Bid(context.Context, *BidRequest) (*BidResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Bid not implemented")
 }
-func (UnimplementedAuctionServiceServer) Cancel(context.Context, *pb.CancelRequest) (*pb.CancelResponse, error) {
+func (UnimplementedAuctionServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
 }
 func (UnimplementedAuctionServiceServer) mustEmbedUnimplementedAuctionServiceServer() {}
@@ -126,7 +125,7 @@ func RegisterAuctionServiceServer(s grpc.ServiceRegistrar, srv AuctionServiceSer
 }
 
 func _AuctionService_Sell_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(pb.SellRequest)
+	in := new(SellRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -138,13 +137,13 @@ func _AuctionService_Sell_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: AuctionService_Sell_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuctionServiceServer).Sell(ctx, req.(*pb.SellRequest))
+		return srv.(AuctionServiceServer).Sell(ctx, req.(*SellRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AuctionService_Bid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(pb.BidRequest)
+	in := new(BidRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -156,13 +155,13 @@ func _AuctionService_Bid_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: AuctionService_Bid_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuctionServiceServer).Bid(ctx, req.(*pb.BidRequest))
+		return srv.(AuctionServiceServer).Bid(ctx, req.(*BidRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _AuctionService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(pb.CancelRequest)
+	in := new(CancelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -174,7 +173,7 @@ func _AuctionService_Cancel_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: AuctionService_Cancel_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuctionServiceServer).Cancel(ctx, req.(*pb.CancelRequest))
+		return srv.(AuctionServiceServer).Cancel(ctx, req.(*CancelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

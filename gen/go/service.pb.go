@@ -4,10 +4,9 @@
 // 	protoc        v7.35.1
 // source: service.proto
 
-package grpc
+package pb
 
 import (
-	pb "github.com/xdward/auction-contracts/gen/go/pb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -29,15 +28,15 @@ const file_service_proto_rawDesc = "" +
 	"\x0eAuctionService\x12I\n" +
 	"\x04Sell\x12\x1f.auction.service.v0.SellRequest\x1a .auction.service.v0.SellResponse\x12F\n" +
 	"\x03Bid\x12\x1e.auction.service.v0.BidRequest\x1a\x1f.auction.service.v0.BidResponse\x12O\n" +
-	"\x06Cancel\x12!.auction.service.v0.CancelRequest\x1a\".auction.service.v0.CancelResponseB1Z/github.com/xdward/auction-contracts/gen/go/grpcb\x06proto3"
+	"\x06Cancel\x12!.auction.service.v0.CancelRequest\x1a\".auction.service.v0.CancelResponseB/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
 
 var file_service_proto_goTypes = []any{
-	(*pb.SellRequest)(nil),    // 0: auction.service.v0.SellRequest
-	(*pb.BidRequest)(nil),     // 1: auction.service.v0.BidRequest
-	(*pb.CancelRequest)(nil),  // 2: auction.service.v0.CancelRequest
-	(*pb.SellResponse)(nil),   // 3: auction.service.v0.SellResponse
-	(*pb.BidResponse)(nil),    // 4: auction.service.v0.BidResponse
-	(*pb.CancelResponse)(nil), // 5: auction.service.v0.CancelResponse
+	(*SellRequest)(nil),    // 0: auction.service.v0.SellRequest
+	(*BidRequest)(nil),     // 1: auction.service.v0.BidRequest
+	(*CancelRequest)(nil),  // 2: auction.service.v0.CancelRequest
+	(*SellResponse)(nil),   // 3: auction.service.v0.SellResponse
+	(*BidResponse)(nil),    // 4: auction.service.v0.BidResponse
+	(*CancelResponse)(nil), // 5: auction.service.v0.CancelResponse
 }
 var file_service_proto_depIdxs = []int32{
 	0, // 0: auction.service.v0.AuctionService.Sell:input_type -> auction.service.v0.SellRequest
@@ -58,6 +57,7 @@ func file_service_proto_init() {
 	if File_service_proto != nil {
 		return
 	}
+	file_message_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
