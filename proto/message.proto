@@ -54,14 +54,41 @@ message CancelResponse {
   bool success = 1;
 }
 
+// Request for getting the current auction state.
+message EventStreamRequest {
+  // The auction version to start updates from.
+  //
+  // If this value is 0, the request is asking for a snapshot of the current auction state.
+  uint64 version_id = 1;
+}
+
 // Response for events in the auction service.
 message EventStreamResponse {
   oneof event {
-    SellEvent sell_event = 1;
-    BidEvent bid_event = 2;
-    CancelEvent cancel_event = 3;
-    ExpireEvent expire_event = 4;
+    Snapshot snapshot = 1;
+    SellEvent sell_event = 2;
+    BidEvent bid_event = 3;
+    CancelEvent cancel_event = 4;
+    ExpireEvent expire_event = 5;
   }
+}
+
+// Message for sharing the current auction state,
+message Snapshot {
+  // Auction listings that are currently active.
+  repeated AuctionListing listings = 1;
+}
+
+// Message for a single auction listing.
+message AuctionListing {
+  // Unique ID of the item listed in the auction.
+  uint64 item_id = 1;
+
+  // The current highest offer. If there are no bids, this value is 0.
+  uint64 current_bid = 2;
+
+  // RFC3339 timestamp for expiration of the auction listing.
+  string expiration = 3;
 }
 
 // Message for announcing a new auction listing.
@@ -73,7 +100,7 @@ message SellEvent {
   uint64 seller_id = 2;
 
   // RFC3339 timestamp for expiration of the auction listing.
-  uint64 expiration = 3;
+  string expiration = 3;
 }
 
 // Message for announcing an updated bid on an item.

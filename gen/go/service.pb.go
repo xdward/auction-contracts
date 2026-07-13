@@ -9,7 +9,6 @@ package pb
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -25,18 +24,18 @@ var File_service_proto protoreflect.FileDescriptor
 
 const file_service_proto_rawDesc = "" +
 	"\n" +
-	"\rservice.proto\x12\x12auction.service.v0\x1a\x1bgoogle/protobuf/empty.proto\x1a\rmessage.proto2\xc6\x02\n" +
+	"\rservice.proto\x12\x12auction.service.v0\x1a\rmessage.proto2\xd6\x02\n" +
 	"\x0eAuctionService\x12I\n" +
 	"\x04Sell\x12\x1f.auction.service.v0.SellRequest\x1a .auction.service.v0.SellResponse\x12F\n" +
 	"\x03Bid\x12\x1e.auction.service.v0.BidRequest\x1a\x1f.auction.service.v0.BidResponse\x12O\n" +
-	"\x06Cancel\x12!.auction.service.v0.CancelRequest\x1a\".auction.service.v0.CancelResponse\x12P\n" +
-	"\vEventStream\x12\x16.google.protobuf.Empty\x1a'.auction.service.v0.EventStreamResponse0\x01B/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
+	"\x06Cancel\x12!.auction.service.v0.CancelRequest\x1a\".auction.service.v0.CancelResponse\x12`\n" +
+	"\vEventStream\x12&.auction.service.v0.EventStreamRequest\x1a'.auction.service.v0.EventStreamResponse0\x01B/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
 
 var file_service_proto_goTypes = []any{
 	(*SellRequest)(nil),         // 0: auction.service.v0.SellRequest
 	(*BidRequest)(nil),          // 1: auction.service.v0.BidRequest
 	(*CancelRequest)(nil),       // 2: auction.service.v0.CancelRequest
-	(*emptypb.Empty)(nil),       // 3: google.protobuf.Empty
+	(*EventStreamRequest)(nil),  // 3: auction.service.v0.EventStreamRequest
 	(*SellResponse)(nil),        // 4: auction.service.v0.SellResponse
 	(*BidResponse)(nil),         // 5: auction.service.v0.BidResponse
 	(*CancelResponse)(nil),      // 6: auction.service.v0.CancelResponse
@@ -46,7 +45,7 @@ var file_service_proto_depIdxs = []int32{
 	0, // 0: auction.service.v0.AuctionService.Sell:input_type -> auction.service.v0.SellRequest
 	1, // 1: auction.service.v0.AuctionService.Bid:input_type -> auction.service.v0.BidRequest
 	2, // 2: auction.service.v0.AuctionService.Cancel:input_type -> auction.service.v0.CancelRequest
-	3, // 3: auction.service.v0.AuctionService.EventStream:input_type -> google.protobuf.Empty
+	3, // 3: auction.service.v0.AuctionService.EventStream:input_type -> auction.service.v0.EventStreamRequest
 	4, // 4: auction.service.v0.AuctionService.Sell:output_type -> auction.service.v0.SellResponse
 	5, // 5: auction.service.v0.AuctionService.Bid:output_type -> auction.service.v0.BidResponse
 	6, // 6: auction.service.v0.AuctionService.Cancel:output_type -> auction.service.v0.CancelResponse
