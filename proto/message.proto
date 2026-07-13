@@ -53,3 +53,78 @@ message CancelResponse {
   // True if the cancellation was successful.
   bool success = 1;
 }
+
+// Response for events in the auction service.
+message EventStreamResponse {
+  oneof event {
+    SellEvent sell_event = 1;
+    BidEvent bid_event = 2;
+    CancelEvent cancel_event = 3;
+    ExpireEvent expire_event = 4;
+  }
+}
+
+// Message for announcing a new auction listing.
+message SellEvent {
+  // Unique ID of the item that has been auctioned.
+  uint64 item_id = 1;
+
+  // Unique ID of the user that auctioned the item.
+  uint64 seller_id = 2;
+
+  // RFC3339 timestamp for expiration of the auction listing.
+  uint64 expiration = 3;
+}
+
+// Message for announcing an updated bid on an item.
+message BidEvent {
+  // Unique ID of the item being bid on.
+  uint64 item_id = 1;
+
+  // Unique ID of the user that submited the bid.
+  uint64 bidder_id = 2;
+
+  // New highest offer.
+  uint64 amount = 3;
+}
+
+// Message for announcing the cancellation of an auction listing.
+message CancelEvent {
+  // Unique ID of the item to return to the seller.
+  uint64 item_id = 1;
+
+  // Unique ID of user selling the item.
+  uint64 seller_id = 2;
+
+  // Unique ID of user holding the highest bid.
+  // If there are no bids the value will be 0.
+  uint64 bidder_id = 3;
+
+  // Unique ID of the amount to return to the highest bidder.
+  // If there are no bids the value will be 0.
+  uint64 amount = 4;
+}
+
+// Message for announcing the end of an auction listing.
+message ExpireEvent {
+  // Unique ID of the item to exchange or return.
+  uint64 item_id = 1;
+
+  // Flag to indicate is the item has been sold.
+  bool sold = 2;
+
+  // Unique ID of user selling the item.
+  uint64 seller_id = 3;
+
+  // Unique ID of user holding the highest bid.
+  // If there are no bids the value will be 0.
+  uint64 bidder_id = 4;
+
+  // Unique ID of the amount to send to the seller.
+  // If there are no bids the value will be 0.
+  //
+  // If the item expires without any bids placed, the item should be returned
+  // to the seller. Otherwise, give the final bid amount to the seller and
+  // reward the item to the highest bidder.
+  uint64 amount = 5;
+}

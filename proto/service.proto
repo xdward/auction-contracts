@@ -1,6 +1,7 @@
 syntax = "proto3";
 package auction.service.v0;
 
+import "google/protobuf/empty.proto";
 import "message.proto";
 
 option go_package = "github.com/xdward/auction-contracts/gen/go;pb";
@@ -14,4 +15,7 @@ service AuctionService {
 
   // Cancels an existing auction listing.
   rpc Cancel(CancelRequest) returns (CancelResponse);
+
+  // Relays events occuring in the auction service.
+  rpc EventStream(google.protobuf.Empty) returns (stream EventStreamResponse);
 }

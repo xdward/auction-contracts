@@ -342,6 +342,411 @@ func (x *CancelResponse) GetSuccess() bool {
 	return false
 }
 
+type EventStreamResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Event:
+	//
+	//	*EventStreamResponse_SellEvent
+	//	*EventStreamResponse_BidEvent
+	//	*EventStreamResponse_CancelEvent
+	//	*EventStreamResponse_ExpireEvent
+	Event         isEventStreamResponse_Event `protobuf_oneof:"event"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EventStreamResponse) Reset() {
+	*x = EventStreamResponse{}
+	mi := &file_message_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EventStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventStreamResponse) ProtoMessage() {}
+
+func (x *EventStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventStreamResponse.ProtoReflect.Descriptor instead.
+func (*EventStreamResponse) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *EventStreamResponse) GetEvent() isEventStreamResponse_Event {
+	if x != nil {
+		return x.Event
+	}
+	return nil
+}
+
+func (x *EventStreamResponse) GetSellEvent() *SellEvent {
+	if x != nil {
+		if x, ok := x.Event.(*EventStreamResponse_SellEvent); ok {
+			return x.SellEvent
+		}
+	}
+	return nil
+}
+
+func (x *EventStreamResponse) GetBidEvent() *BidEvent {
+	if x != nil {
+		if x, ok := x.Event.(*EventStreamResponse_BidEvent); ok {
+			return x.BidEvent
+		}
+	}
+	return nil
+}
+
+func (x *EventStreamResponse) GetCancelEvent() *CancelEvent {
+	if x != nil {
+		if x, ok := x.Event.(*EventStreamResponse_CancelEvent); ok {
+			return x.CancelEvent
+		}
+	}
+	return nil
+}
+
+func (x *EventStreamResponse) GetExpireEvent() *ExpireEvent {
+	if x != nil {
+		if x, ok := x.Event.(*EventStreamResponse_ExpireEvent); ok {
+			return x.ExpireEvent
+		}
+	}
+	return nil
+}
+
+type isEventStreamResponse_Event interface {
+	isEventStreamResponse_Event()
+}
+
+type EventStreamResponse_SellEvent struct {
+	SellEvent *SellEvent `protobuf:"bytes,1,opt,name=sell_event,json=sellEvent,proto3,oneof"`
+}
+
+type EventStreamResponse_BidEvent struct {
+	BidEvent *BidEvent `protobuf:"bytes,2,opt,name=bid_event,json=bidEvent,proto3,oneof"`
+}
+
+type EventStreamResponse_CancelEvent struct {
+	CancelEvent *CancelEvent `protobuf:"bytes,3,opt,name=cancel_event,json=cancelEvent,proto3,oneof"`
+}
+
+type EventStreamResponse_ExpireEvent struct {
+	ExpireEvent *ExpireEvent `protobuf:"bytes,4,opt,name=expire_event,json=expireEvent,proto3,oneof"`
+}
+
+func (*EventStreamResponse_SellEvent) isEventStreamResponse_Event() {}
+
+func (*EventStreamResponse_BidEvent) isEventStreamResponse_Event() {}
+
+func (*EventStreamResponse_CancelEvent) isEventStreamResponse_Event() {}
+
+func (*EventStreamResponse_ExpireEvent) isEventStreamResponse_Event() {}
+
+// Message for announcing a new auction listing.
+type SellEvent struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique ID of the item that has been auctioned.
+	ItemId uint64 `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	// Unique ID of the user that auctioned the item.
+	SellerId uint64 `protobuf:"varint,2,opt,name=seller_id,json=sellerId,proto3" json:"seller_id,omitempty"`
+	// RFC3339 timestamp for expiration of the auction listing.
+	Expiration    uint64 `protobuf:"varint,3,opt,name=expiration,proto3" json:"expiration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SellEvent) Reset() {
+	*x = SellEvent{}
+	mi := &file_message_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SellEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SellEvent) ProtoMessage() {}
+
+func (x *SellEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SellEvent.ProtoReflect.Descriptor instead.
+func (*SellEvent) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SellEvent) GetItemId() uint64 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+func (x *SellEvent) GetSellerId() uint64 {
+	if x != nil {
+		return x.SellerId
+	}
+	return 0
+}
+
+func (x *SellEvent) GetExpiration() uint64 {
+	if x != nil {
+		return x.Expiration
+	}
+	return 0
+}
+
+// Message for announcing an updated bid on an item.
+type BidEvent struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique ID of the item being bid on.
+	ItemId uint64 `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	// Unique ID of the user that submited the bid.
+	BidderId uint64 `protobuf:"varint,2,opt,name=bidder_id,json=bidderId,proto3" json:"bidder_id,omitempty"`
+	// New highest offer.
+	Amount        uint64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BidEvent) Reset() {
+	*x = BidEvent{}
+	mi := &file_message_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BidEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BidEvent) ProtoMessage() {}
+
+func (x *BidEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BidEvent.ProtoReflect.Descriptor instead.
+func (*BidEvent) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BidEvent) GetItemId() uint64 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+func (x *BidEvent) GetBidderId() uint64 {
+	if x != nil {
+		return x.BidderId
+	}
+	return 0
+}
+
+func (x *BidEvent) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+// Message for announcing the cancellation of an auction listing.
+type CancelEvent struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique ID of the item to return to the seller.
+	ItemId uint64 `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	// Unique ID of user selling the item.
+	SellerId uint64 `protobuf:"varint,2,opt,name=seller_id,json=sellerId,proto3" json:"seller_id,omitempty"`
+	// Unique ID of user holding the highest bid.
+	// If there are no bids the value will be 0.
+	BidderId uint64 `protobuf:"varint,3,opt,name=bidder_id,json=bidderId,proto3" json:"bidder_id,omitempty"`
+	// Unique ID of the amount to return to the highest bidder.
+	// If there are no bids the value will be 0.
+	Amount        uint64 `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelEvent) Reset() {
+	*x = CancelEvent{}
+	mi := &file_message_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelEvent) ProtoMessage() {}
+
+func (x *CancelEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelEvent.ProtoReflect.Descriptor instead.
+func (*CancelEvent) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CancelEvent) GetItemId() uint64 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+func (x *CancelEvent) GetSellerId() uint64 {
+	if x != nil {
+		return x.SellerId
+	}
+	return 0
+}
+
+func (x *CancelEvent) GetBidderId() uint64 {
+	if x != nil {
+		return x.BidderId
+	}
+	return 0
+}
+
+func (x *CancelEvent) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+// Message for announcing the end of an auction listing.
+type ExpireEvent struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Unique ID of the item to exchange or return.
+	ItemId uint64 `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	// Flag to indicate is the item has been sold.
+	Sold bool `protobuf:"varint,2,opt,name=sold,proto3" json:"sold,omitempty"`
+	// Unique ID of user selling the item.
+	SellerId uint64 `protobuf:"varint,3,opt,name=seller_id,json=sellerId,proto3" json:"seller_id,omitempty"`
+	// Unique ID of user holding the highest bid.
+	// If there are no bids the value will be 0.
+	BidderId uint64 `protobuf:"varint,4,opt,name=bidder_id,json=bidderId,proto3" json:"bidder_id,omitempty"`
+	// Unique ID of the amount to send to the seller.
+	// If there are no bids the value will be 0.
+	//
+	// If the item expires without any bids placed, the item should be returned
+	// to the seller. Otherwise, give the final bid amount to the seller and
+	// reward the item to the highest bidder.
+	Amount        uint64 `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExpireEvent) Reset() {
+	*x = ExpireEvent{}
+	mi := &file_message_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExpireEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExpireEvent) ProtoMessage() {}
+
+func (x *ExpireEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExpireEvent.ProtoReflect.Descriptor instead.
+func (*ExpireEvent) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ExpireEvent) GetItemId() uint64 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+func (x *ExpireEvent) GetSold() bool {
+	if x != nil {
+		return x.Sold
+	}
+	return false
+}
+
+func (x *ExpireEvent) GetSellerId() uint64 {
+	if x != nil {
+		return x.SellerId
+	}
+	return 0
+}
+
+func (x *ExpireEvent) GetBidderId() uint64 {
+	if x != nil {
+		return x.BidderId
+	}
+	return 0
+}
+
+func (x *ExpireEvent) GetAmount() uint64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
 var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
@@ -364,7 +769,35 @@ const file_message_proto_rawDesc = "" +
 	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x1b\n" +
 	"\tseller_id\x18\x02 \x01(\x04R\bsellerId\"*\n" +
 	"\x0eCancelResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccessB/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xa7\x02\n" +
+	"\x13EventStreamResponse\x12>\n" +
+	"\n" +
+	"sell_event\x18\x01 \x01(\v2\x1d.auction.service.v0.SellEventH\x00R\tsellEvent\x12;\n" +
+	"\tbid_event\x18\x02 \x01(\v2\x1c.auction.service.v0.BidEventH\x00R\bbidEvent\x12D\n" +
+	"\fcancel_event\x18\x03 \x01(\v2\x1f.auction.service.v0.CancelEventH\x00R\vcancelEvent\x12D\n" +
+	"\fexpire_event\x18\x04 \x01(\v2\x1f.auction.service.v0.ExpireEventH\x00R\vexpireEventB\a\n" +
+	"\x05event\"a\n" +
+	"\tSellEvent\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x1b\n" +
+	"\tseller_id\x18\x02 \x01(\x04R\bsellerId\x12\x1e\n" +
+	"\n" +
+	"expiration\x18\x03 \x01(\x04R\n" +
+	"expiration\"X\n" +
+	"\bBidEvent\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x1b\n" +
+	"\tbidder_id\x18\x02 \x01(\x04R\bbidderId\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\x04R\x06amount\"x\n" +
+	"\vCancelEvent\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x1b\n" +
+	"\tseller_id\x18\x02 \x01(\x04R\bsellerId\x12\x1b\n" +
+	"\tbidder_id\x18\x03 \x01(\x04R\bbidderId\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x04R\x06amount\"\x8c\x01\n" +
+	"\vExpireEvent\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x12\n" +
+	"\x04sold\x18\x02 \x01(\bR\x04sold\x12\x1b\n" +
+	"\tseller_id\x18\x03 \x01(\x04R\bsellerId\x12\x1b\n" +
+	"\tbidder_id\x18\x04 \x01(\x04R\bbidderId\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x04R\x06amountB/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
 
 var (
 	file_message_proto_rawDescOnce sync.Once
@@ -378,21 +811,30 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_message_proto_goTypes = []any{
-	(*SellRequest)(nil),    // 0: auction.service.v0.SellRequest
-	(*SellResponse)(nil),   // 1: auction.service.v0.SellResponse
-	(*BidRequest)(nil),     // 2: auction.service.v0.BidRequest
-	(*BidResponse)(nil),    // 3: auction.service.v0.BidResponse
-	(*CancelRequest)(nil),  // 4: auction.service.v0.CancelRequest
-	(*CancelResponse)(nil), // 5: auction.service.v0.CancelResponse
+	(*SellRequest)(nil),         // 0: auction.service.v0.SellRequest
+	(*SellResponse)(nil),        // 1: auction.service.v0.SellResponse
+	(*BidRequest)(nil),          // 2: auction.service.v0.BidRequest
+	(*BidResponse)(nil),         // 3: auction.service.v0.BidResponse
+	(*CancelRequest)(nil),       // 4: auction.service.v0.CancelRequest
+	(*CancelResponse)(nil),      // 5: auction.service.v0.CancelResponse
+	(*EventStreamResponse)(nil), // 6: auction.service.v0.EventStreamResponse
+	(*SellEvent)(nil),           // 7: auction.service.v0.SellEvent
+	(*BidEvent)(nil),            // 8: auction.service.v0.BidEvent
+	(*CancelEvent)(nil),         // 9: auction.service.v0.CancelEvent
+	(*ExpireEvent)(nil),         // 10: auction.service.v0.ExpireEvent
 }
 var file_message_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	7,  // 0: auction.service.v0.EventStreamResponse.sell_event:type_name -> auction.service.v0.SellEvent
+	8,  // 1: auction.service.v0.EventStreamResponse.bid_event:type_name -> auction.service.v0.BidEvent
+	9,  // 2: auction.service.v0.EventStreamResponse.cancel_event:type_name -> auction.service.v0.CancelEvent
+	10, // 3: auction.service.v0.EventStreamResponse.expire_event:type_name -> auction.service.v0.ExpireEvent
+	4,  // [4:4] is the sub-list for method output_type
+	4,  // [4:4] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -400,13 +842,19 @@ func file_message_proto_init() {
 	if File_message_proto != nil {
 		return
 	}
+	file_message_proto_msgTypes[6].OneofWrappers = []any{
+		(*EventStreamResponse_SellEvent)(nil),
+		(*EventStreamResponse_BidEvent)(nil),
+		(*EventStreamResponse_CancelEvent)(nil),
+		(*EventStreamResponse_ExpireEvent)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_message_proto_rawDesc), len(file_message_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
