@@ -1,0 +1,14 @@
+name: Validate Generated Go
+
+on: push
+
+jobs:
+    validate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: 1.26
+            - run: go list ./gen/go
+            - run: go vet ./gen/go
