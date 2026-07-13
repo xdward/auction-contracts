@@ -54,14 +54,6 @@ message CancelResponse {
   bool success = 1;
 }
 
-// Request for getting the current auction state.
-message EventStreamRequest {
-  // The auction version to start updates from.
-  //
-  // If this value is 0, the request is asking for a snapshot of the current auction state.
-  uint64 version_id = 1;
-}
-
 // Response for events in the auction service.
 message EventStreamResponse {
   oneof event {
@@ -77,9 +69,6 @@ message EventStreamResponse {
 message Snapshot {
   // Auction listings that are currently active.
   repeated AuctionListing listings = 1;
-
-  // Current version of the auction.
-  string version = 2;
 }
 
 // Message for a single auction listing.

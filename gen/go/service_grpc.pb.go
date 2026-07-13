@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -36,7 +37,7 @@ type AuctionServiceClient interface {
 	// Cancels an existing auction listing.
 	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
 	// Relays events occuring in the auction service.
-	EventStream(ctx context.Context, in *EventStreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamResponse], error)
+	EventStream(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamResponse], error)
 }
 
 type auctionServiceClient struct {
@@ -77,13 +78,13 @@ func (c *auctionServiceClient) Cancel(ctx context.Context, in *CancelRequest, op
 	return out, nil
 }
 
-func (c *auctionServiceClient) EventStream(ctx context.Context, in *EventStreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamResponse], error) {
+func (c *auctionServiceClient) EventStream(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &AuctionService_ServiceDesc.Streams[0], AuctionService_EventStream_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[EventStreamRequest, EventStreamResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[emptypb.Empty, EventStreamResponse]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -107,7 +108,7 @@ type AuctionServiceServer interface {
 	// Cancels an existing auction listing.
 	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
 	// Relays events occuring in the auction service.
-	EventStream(*EventStreamRequest, grpc.ServerStreamingServer[EventStreamResponse]) error
+	EventStream(*emptypb.Empty, grpc.ServerStreamingServer[EventStreamResponse]) error
 	mustEmbedUnimplementedAuctionServiceServer()
 }
 
@@ -127,7 +128,7 @@ func (UnimplementedAuctionServiceServer) Bid(context.Context, *BidRequest) (*Bid
 func (UnimplementedAuctionServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
 }
-func (UnimplementedAuctionServiceServer) EventStream(*EventStreamRequest, grpc.ServerStreamingServer[EventStreamResponse]) error {
+func (UnimplementedAuctionServiceServer) EventStream(*emptypb.Empty, grpc.ServerStreamingServer[EventStreamResponse]) error {
 	return status.Error(codes.Unimplemented, "method EventStream not implemented")
 }
 func (UnimplementedAuctionServiceServer) mustEmbedUnimplementedAuctionServiceServer() {}
@@ -206,11 +207,11 @@ func _AuctionService_Cancel_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _AuctionService_EventStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(EventStreamRequest)
+	m := new(emptypb.Empty)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AuctionServiceServer).EventStream(m, &grpc.GenericServerStream[EventStreamRequest, EventStreamResponse]{ServerStream: stream})
+	return srv.(AuctionServiceServer).EventStream(m, &grpc.GenericServerStream[emptypb.Empty, EventStreamResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
