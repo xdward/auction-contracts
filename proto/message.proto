@@ -69,6 +69,9 @@ message EventStreamResponse {
 message Snapshot {
   // Auction listings that are currently active.
   repeated AuctionListing listings = 1;
+
+  // The auction version linked to the snapshot.
+  string version = 2;
 }
 
 // Message for a single auction listing.

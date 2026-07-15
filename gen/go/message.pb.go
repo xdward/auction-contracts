@@ -477,7 +477,9 @@ func (*EventStreamResponse_ExpireEvent) isEventStreamResponse_Event() {}
 type Snapshot struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Auction listings that are currently active.
-	Listings      []*AuctionListing `protobuf:"bytes,1,rep,name=listings,proto3" json:"listings,omitempty"`
+	Listings []*AuctionListing `protobuf:"bytes,1,rep,name=listings,proto3" json:"listings,omitempty"`
+	// The auction version linked to the snapshot.
+	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -517,6 +519,13 @@ func (x *Snapshot) GetListings() []*AuctionListing {
 		return x.Listings
 	}
 	return nil
+}
+
+func (x *Snapshot) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
 }
 
 // Message for a single auction listing.
@@ -904,9 +913,10 @@ const file_message_proto_rawDesc = "" +
 	"\tbid_event\x18\x03 \x01(\v2\x1c.auction.service.v0.BidEventH\x00R\bbidEvent\x12D\n" +
 	"\fcancel_event\x18\x04 \x01(\v2\x1f.auction.service.v0.CancelEventH\x00R\vcancelEvent\x12D\n" +
 	"\fexpire_event\x18\x05 \x01(\v2\x1f.auction.service.v0.ExpireEventH\x00R\vexpireEventB\a\n" +
-	"\x05event\"J\n" +
+	"\x05event\"d\n" +
 	"\bSnapshot\x12>\n" +
-	"\blistings\x18\x01 \x03(\v2\".auction.service.v0.AuctionListingR\blistings\"j\n" +
+	"\blistings\x18\x01 \x03(\v2\".auction.service.v0.AuctionListingR\blistings\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\"j\n" +
 	"\x0eAuctionListing\x12\x17\n" +
 	"\aitem_id\x18\x01 \x01(\x04R\x06itemId\x12\x1f\n" +
 	"\vcurrent_bid\x18\x02 \x01(\x04R\n" +
