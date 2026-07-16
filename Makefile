@@ -1,6 +1,6 @@
 PROTO_PATH=proto
 GO_OUT=gen/go
-GO_OPT=module=github.com/xdward/auction-contracts
+GO_OPT=module=github.com/xdward/auction-contracts/gen/go
 
 .PHONY: proto-compile
 proto-compile:
@@ -12,4 +12,4 @@ proto-compile:
 
 .PHONY: clean
 clean:
-	rm -rf $(GO_OUT)
+	rm -rf $(GO_OUT)/*.pb.go

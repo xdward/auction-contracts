@@ -1,4 +1,4 @@
-module github.com/xdward/auction-contracts
+module github.com/xdward/auction-contracts/gen/go
 
 go 1.26.0
 
