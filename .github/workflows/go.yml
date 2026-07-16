@@ -2,8 +2,9 @@ name: Validate Generated Go
 
 on:
     push:
-        paths-ignore:
-            - README.md
+        paths:
+            - .github/workflows/**
+            - gen/go/**
 
 jobs:
     validate:
@@ -13,5 +14,7 @@ jobs:
             - uses: actions/setup-go@v5
               with:
                   go-version: 1.26
-            - run: go list ./gen/go
-            - run: go vet ./gen/go
+            - working-directory: gen/go
+              run: go list
+            - working-directory: gen/go
+              run: go vet
