@@ -30,7 +30,7 @@ const file_service_proto_rawDesc = "" +
 	"\x04Sell\x12\x1f.auction.service.v0.SellRequest\x1a .auction.service.v0.SellResponse\x12F\n" +
 	"\x03Bid\x12\x1e.auction.service.v0.BidRequest\x1a\x1f.auction.service.v0.BidResponse\x12O\n" +
 	"\x06Cancel\x12!.auction.service.v0.CancelRequest\x1a\".auction.service.v0.CancelResponse\x12P\n" +
-	"\vEventStream\x12\x16.google.protobuf.Empty\x1a'.auction.service.v0.EventStreamResponse0\x01B/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
+	"\vEventStream\x12\x16.google.protobuf.Empty\x1a'.auction.service.v0.EventStreamResponse0\x01B(Z&github.com/xdward/auction-contracts;pbb\x06proto3"
 
 var file_service_proto_goTypes = []any{
 	(*SellRequest)(nil),         // 0: auction.service.v0.SellRequest

@@ -1,6 +1,6 @@
 PROTO_PATH=proto
 GO_OUT=gen/go
-GO_OPT=module=github.com/xdward/auction-contracts/gen/go
+GO_OPT=module=github.com/xdward/auction-contracts
 
 .PHONY: proto-compile
 proto-compile:

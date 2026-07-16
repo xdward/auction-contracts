@@ -944,7 +944,7 @@ const file_message_proto_rawDesc = "" +
 	"\x04sold\x18\x02 \x01(\bR\x04sold\x12\x1b\n" +
 	"\tseller_id\x18\x03 \x01(\x04R\bsellerId\x12\x1b\n" +
 	"\tbidder_id\x18\x04 \x01(\x04R\bbidderId\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x04R\x06amountB/Z-github.com/xdward/auction-contracts/gen/go;pbb\x06proto3"
+	"\x06amount\x18\x05 \x01(\x04R\x06amountB(Z&github.com/xdward/auction-contracts;pbb\x06proto3"
 
 var (
 	file_message_proto_rawDescOnce sync.Once
