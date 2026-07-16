@@ -4,7 +4,7 @@ gRPC service definition for a simple auction system.
 
 ## RPC Methods
 
-### 1) `Sell(SellRequest) returns (SellResponse)`
+### `Sell(SellRequest) returns (SellResponse)`
 Creates a new auction listing.
 
 **SellRequest**
@@ -15,9 +15,7 @@ Creates a new auction listing.
 **SellResponse**
 - `success` (bool, field 1): Whether the listing was created successfully
 
----
-
-### 2) `Bid(BidRequest) returns (BidResponse)`
+### `Bid(BidRequest) returns (BidResponse)`
 Submits a bid for an existing auction listing.
 
 **BidRequest**
@@ -28,9 +26,7 @@ Submits a bid for an existing auction listing.
 **BidResponse**
 - `success` (bool, field 1): Whether the bid was accepted successfully
 
----
-
-### 3) `Cancel(CancelRequest) returns (CancelResponse)`
+### `Cancel(CancelRequest) returns (CancelResponse)`
 Cancels an existing auction listing.
 
 **CancelRequest**
@@ -40,9 +36,7 @@ Cancels an existing auction listing.
 **CancelResponse**
 - `success` (bool, field 1): Whether cancellation succeeded
 
----
-
-### 4) `EventStream(google.protobuf.Empty) returns (stream EventStreamResponse)`
+### `EventStream(google.protobuf.Empty) returns (stream EventStreamResponse)`
 Streams auction events (snapshot and changes) to clients.
 
 **Request**
